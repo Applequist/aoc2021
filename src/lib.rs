@@ -1,3 +1,7 @@
+pub fn greet(msg: &str) {
+    println!("Hello {}!", msg);
+}
+
 #[cfg(test)]
 mod tests {
     #[test]
