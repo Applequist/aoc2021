@@ -7,6 +7,8 @@ fn main() {
     let reader = BufReader::new(file);
     let increase_count: usize = reader.lines()
         .map(|l| l.unwrap().parse::<u16>().unwrap())
+        .tuple_windows::<(_, _, _)>()
+        .map(|(a, b, c)| a + b + c)
         .tuple_windows::<(_, _)>()
         .map(|(a, b)| if a < b { 1 } else { 0 })
         .sum();
