@@ -3,7 +3,7 @@ use std::io::{BufRead, BufReader};
 use itertools::Itertools;
 
 fn main() {
-    let file = File::open("inputs/depths.txt").expect("Can't open input");
+    let file = File::open("./inputs/depths.txt").expect("Can't open input");
     let reader = BufReader::new(file);
     let increase_count: usize = reader.lines()
         .map(|l| l.unwrap().parse::<u16>().unwrap())
