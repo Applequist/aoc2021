@@ -32,12 +32,13 @@ fn main() {
         .map(|l| Command::parse(l))
         .collect::<Result<Vec<Command>, Error>>().unwrap();
     let final_position = commands.into_iter()
-        .fold((0usize, 0usize), |(h, d), cmd| {
+        .fold((0usize, 0usize, 0usize), |(a, h, d), cmd| {
             match cmd {
-                Command::Forward(amt) => (h + amt as usize, d),
-                Command::Up(amt) => (h, d - amt as usize),
-                Command::Down(amt) => (h, d + amt as usize),
+                Command::Forward(amt) => (a, h + amt as usize, d + a * amt as usize),
+                Command::Up(amt) => (a - amt as usize, h, d),
+                Command::Down(amt) => (a + amt as usize, h, d),
             }
         });
     println!("Final position = {:?}", final_position);
+    println!("h * d = {}", final_position.1 * final_position.2);
 }
